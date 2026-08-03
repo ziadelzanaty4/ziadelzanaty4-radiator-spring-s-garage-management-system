@@ -38,8 +38,8 @@ class Car:
     def set_capacity(self, capacity):
         self._capacity = capacity
 class Racer(Car):
-    def __init__(self, number, name, age, team, speed, capacity, races,laps):
-        super().__init__(self, number, name, age, team, speed, capacity)
+    def __init__(self, number, name, age, type, team, speed, capacity, races, laps):
+        super().__init__(number, name, age, type, team, speed, capacity)
         self._races=races
         self._laps=laps
     #racer getters and setters     
@@ -52,10 +52,10 @@ class Racer(Car):
     def set_laps(self, laps):
         self._laps = laps     
 class SupportVeichle(Car):
-    def __init__(self, number, name, age, team, speed, capacity, CrewSize,ReliabilityRating):
-        super().__init__(self, number, name, age, team, speed, capacity)
-        self._CrewSize=CrewSize
-        self._ReliabilityRating=ReliabilityRating
+    def __init__(self, number, name, age, type, team, speed, capacity, crewSize,reliability):
+        super().__init__(number, name, age, type, team, speed, capacity)
+        self._crewSize=crewSize
+        self._reliability=reliability
     # getters    
     def get_crewSize(self):
         return self._crewSize
@@ -66,7 +66,6 @@ class SupportVeichle(Car):
         self._crewSize = crewSize
     def set_reliability(self, reliability):
         self._reliability = reliability    
-
 
 
 Menu= f"""
@@ -80,8 +79,32 @@ Menu= f"""
 7. Exit
 =======================================
 """
+garage = []
 option=None
 while option!=7:
     print(Menu)
     option=int(input("What's the move, Champ?"))
+    if option==1:
+        number = input("Enter number: ")
+        name = input("Enter name: ")
+        age = int(input("Enter age: "))
+        vtype = input("Enter type: ")
+        team = input("Enter team: ")
+        speed = float(input("Enter speed: "))
+        capacity = int(input("Enter capacity: "))
+        if vtype=="racer":
+            races=int(input("enter number of races completed: "))
+            laps=int(input("enter number of laps completed: "))
+            veichle=Racer(number, name, age, "Racer", team, speed, capacity, races,laps)
+        elif vtype=="support":
+            crewSize=int(input("enter crew size: "))
+            reliability=float(input("enter reliability rating: "))
+            veichle= SupportVeichle(number, name, age, "SupportVeichle", team, speed, capacity, crewSize,reliability)
+        else:
+            print("invalid veichle type")
+            continue
+        garage.append(veichle)
+        print("veichle checked in successfully") 
+              
+
 
