@@ -51,7 +51,7 @@ class Racer(Car):
         return self._laps
     def set_laps(self, laps):
         self._laps = laps     
-class SupportVeichle(Car):
+class SupportVehicle(Car):
     def __init__(self, number, name, age, type, team, speed, capacity, crewSize,reliability):
         super().__init__(number, name, age, type, team, speed, capacity)
         self._crewSize=crewSize
@@ -95,16 +95,48 @@ while option!=7:
         if vtype=="racer":
             races=int(input("enter number of races completed: "))
             laps=int(input("enter number of laps completed: "))
-            veichle=Racer(number, name, age, "Racer", team, speed, capacity, races,laps)
+            vehicle=Racer(number, name, age, "Racer", team, speed, capacity, races,laps)
         elif vtype=="support":
             crewSize=int(input("enter crew size: "))
             reliability=float(input("enter reliability rating: "))
-            veichle= SupportVeichle(number, name, age, "SupportVeichle", team, speed, capacity, crewSize,reliability)
+            vehicle= SupportVehicle(number, name, age, "SupportVehicle", team, speed, capacity, crewSize,reliability)
         else:
-            print("invalid veichle type")
+            print("invalid vehicle type")
             continue
-        garage.append(veichle)
-        print("veichle checked in successfully") 
+        garage.append(vehicle)
+        print("vehicle checked in successfully") 
+    elif option == 2:
+        if len(garage) == 0:
+            print("Garage is empty.")
+        else:
+            for vehicle in garage:
+                if vehicle.get_type() == "Racer":
+                    print(f"""
+    Number: {vehicle.get_number()}
+    Name: {vehicle.get_name()}
+    Age: {vehicle.get_age()}
+    Type: {vehicle.get_type()}
+    Team: {vehicle.get_team()}
+    Speed: {vehicle.get_speed()}
+    Capacity: {vehicle.get_capacity()}
+    Races: {vehicle.get_races()}
+    Laps: {vehicle.get_laps()}
+    """)
+                elif vehicle.get_type() == "SupportVehicle":
+                    print(f"""
+    Number: {vehicle.get_number()}
+    Name: {vehicle.get_name()}
+    Age: {vehicle.get_age()}
+    Type: {vehicle.get_type()}
+    Team: {vehicle.get_team()}
+    Speed: {vehicle.get_speed()}
+    Capacity: {vehicle.get_capacity()}
+    Crew Size: {vehicle.get_crewSize()}
+    Reliability: {vehicle.get_reliability()}
+    """)
+                print("-" * 40) 
+                                         
+   
               
 
 
