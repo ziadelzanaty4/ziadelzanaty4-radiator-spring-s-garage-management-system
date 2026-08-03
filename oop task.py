@@ -7,6 +7,7 @@ class Car:
         self._team=team
         self._speed=speed
         self._capacity=capacity
+    #getters    
     def get_number(self):
         return self._number
     def get_name(self):
@@ -20,8 +21,22 @@ class Car:
     def get_speed(self):
         return self._speed
     def get_capacity(self):
-        return self._capacity    
-
+        return self._capacity 
+    #setters   
+    def set_number(self, number):
+        self._number = number
+    def set_name(self, name):
+        self._name = name
+    def set_age(self, age):
+        self._age = age
+    def set_type(self, type):
+        self._type = type
+    def set_team(self, team):
+        self._team = team
+    def set_speed(self, speed):
+        self._speed = speed
+    def set_capacity(self, capacity):
+        self._capacity = capacity
 class Racer(Car):
     def __init__(self, number, name, age, team, speed, capacity, races,laps):
         super().__init__(self, number, name, age, team, speed, capacity)
