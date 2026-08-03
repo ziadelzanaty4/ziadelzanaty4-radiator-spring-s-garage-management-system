@@ -135,7 +135,106 @@ while option!=7:
     Reliability: {vehicle.get_reliability()}
     """)
                 print("-" * 40) 
-                                         
+    elif option == 3:
+        number = input("Enter vehicle number: ")
+        found = False
+        for vehicle in garage:
+            if vehicle.get_number() == number:
+                found = True
+                print("""
+    1. Name
+    2. Team
+    3. Speed
+    4. Capacity
+    5. Type-specific attribute
+    """)
+                choice = int(input("What do you want to change? "))
+                if choice == 1:
+                    new_name = input("Enter new name: ")
+                    vehicle.set_name(new_name)
+                elif choice == 2:
+                    new_team = input("Enter new team: ")
+                    vehicle.set_team(new_team)
+                elif choice == 3:
+                    new_speed = float(input("Enter new speed: "))
+                    vehicle.set_speed(new_speed)
+                elif choice == 4:
+                    new_capacity = int(input("Enter new capacity: "))
+                    vehicle.set_capacity(new_capacity)
+                elif choice == 5:
+                    if vehicle.get_type() == "Racer":
+                        print("""
+    1. Races
+    2. Laps
+    """)
+                        x = int(input("Choose: "))
+                        if x == 1:
+                            new_races = int(input("Enter new races: "))
+                            vehicle.set_races(new_races)
+                        elif x == 2:
+                            new_laps = int(input("Enter new laps: "))
+                            vehicle.set_laps(new_laps)
+                    elif vehicle.get_type() == "SupportVehicle":
+                        print("""
+    1. Crew Size
+    2. Reliability
+    """)
+                        x = int(input("Choose: "))
+                        if x == 1:
+                            new_crew = int(input("Enter new crew size: "))
+                            vehicle.set_crewSize(new_crew)
+                        elif x == 2:
+                            new_reliability = float(input("Enter new reliability: "))
+                            vehicle.set_reliability(new_reliability)
+                print("Vehicle updated successfully!")
+                break
+        if not found:
+            print("Vehicle not found!")
+    elif option == 4:
+        number = input("Enter vehicle number to retire: ")
+        found = False
+        for vehicle in garage:
+            if vehicle.get_number() == number:
+                garage.remove(vehicle)
+                found = True
+                print("Vehicle retired successfully!")
+                break
+        if not found:
+            print("Vehicle not found!") 
+    elif option == 5:
+        number = input("Enter vehicle number: ")
+        found = False
+        for vehicle in garage:
+            if vehicle.get_number() == number:
+                found = True
+                if vehicle.get_type() == "Racer":
+                    print(f"""
+    Number: {vehicle.get_number()}
+    Name: {vehicle.get_name()}
+    Age: {vehicle.get_age()}
+    Type: {vehicle.get_type()}
+    Team: {vehicle.get_team()}
+    Speed: {vehicle.get_speed()}
+    Capacity: {vehicle.get_capacity()}
+    Races: {vehicle.get_races()}
+    Laps: {vehicle.get_laps()}
+    """)
+                elif vehicle.get_type() == "SupportVehicle":
+                    print(f"""
+    Number: {vehicle.get_number()}
+    Name: {vehicle.get_name()}
+    Age: {vehicle.get_age()}
+    Type: {vehicle.get_type()}
+    Team: {vehicle.get_team()}
+    Speed: {vehicle.get_speed()}
+    Capacity: {vehicle.get_capacity()}
+    Crew Size: {vehicle.get_crewSize()}
+    Reliability: {vehicle.get_reliability()}
+    """)
+                break
+        if not found:
+            print("Vehicle not found!")                                       
+
    
               
 
