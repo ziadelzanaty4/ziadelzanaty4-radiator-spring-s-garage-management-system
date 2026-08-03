@@ -1,22 +1,23 @@
 class Car:
     def __init__(self, number, name, age, type, team, speed, capacity):
-        self.number=number
-        self.name=name
-        self.age=age
-        self.type=type
-        self.team=team
-        self.speed=speed
-        self.capacity=capacity
+        self._number=number
+        self._name=name
+        self._age=age
+        self._type=type
+        self._team=team
+        self._speed=speed
+        self._capacity=capacity
+
 class Racer(Car):
     def __init__(self, number, name, age, team, speed, capacity, races,laps):
         super().__init__(self, number, name, age, team, speed, capacity)
-        self.races=races
-        self.laps=laps  
+        self._races=races
+        self._laps=laps  
 class SupportVeichle(Car):
     def __init__(self, number, name, age, team, speed, capacity, CrewSize,ReliabilityRating):
         super().__init__(self, number, name, age, team, speed, capacity)
-        self.CrewSize=CrewSize
-        self.ReliabilityRating=ReliabilityRating
+        self._CrewSize=CrewSize
+        self._ReliabilityRating=ReliabilityRating
 
 
 
@@ -31,4 +32,8 @@ Menu= f"""
 7. Exit
 =======================================
 """
-print(Menu)
+option=None
+while option!=7:
+    print(Menu)
+    option=int(input("What's the move, Champ?"))
+
