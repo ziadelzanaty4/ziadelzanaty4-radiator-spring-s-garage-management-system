@@ -56,6 +56,16 @@ class SupportVeichle(Car):
         super().__init__(self, number, name, age, team, speed, capacity)
         self._CrewSize=CrewSize
         self._ReliabilityRating=ReliabilityRating
+    # getters    
+    def get_crewSize(self):
+        return self._crewSize
+    def get_reliability(self):
+        return self._reliability
+    # Setters
+    def set_crewSize(self, crewSize):
+        self._crewSize = crewSize
+    def set_reliability(self, reliability):
+        self._reliability = reliability    
 
 
 
