@@ -11,4 +11,9 @@ class Racer(Car):
     def __init__(self, number, name, age, team, speed, capacity, races,laps):
         super().__init__(self, number, name, age, team, speed, capacity)
         self.races=races
-        self.laps=laps        
+        self.laps=laps  
+class SupportVeichle(Car):
+    def __init__(self, number, name, age, team, speed, capacity, CrewSize,ReliabilityRating):
+        super().__init__(self, number, name, age, team, speed, capacity)
+        self.CrewSize=CrewSize
+        self.ReliabilityRating=ReliabilityRating              
