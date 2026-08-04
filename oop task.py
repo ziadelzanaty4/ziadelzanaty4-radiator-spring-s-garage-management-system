@@ -139,6 +139,7 @@ while option!=7:
     Team: {vehicle.get_team()}
     Speed: {vehicle.get_speed()}
     Capacity: {vehicle.get_capacity()}
+    Performance Score: {vehicle.calculate_performance()}
     Races: {vehicle.get_races()}
     Laps: {vehicle.get_laps()}
     """)
@@ -151,6 +152,7 @@ while option!=7:
     Team: {vehicle.get_team()}
     Speed: {vehicle.get_speed()}
     Capacity: {vehicle.get_capacity()}
+    Performance Score: {vehicle.calculate_performance()}
     Crew Size: {vehicle.get_crewSize()}
     Reliability: {vehicle.get_reliability()}
     """)
@@ -236,6 +238,7 @@ while option!=7:
     Team: {vehicle.get_team()}
     Speed: {vehicle.get_speed()}
     Capacity: {vehicle.get_capacity()}
+    Performance Score: {vehicle.calculate_performance()}
     Races: {vehicle.get_races()}
     Laps: {vehicle.get_laps()}
     """)
@@ -248,6 +251,7 @@ while option!=7:
     Team: {vehicle.get_team()}
     Speed: {vehicle.get_speed()}
     Capacity: {vehicle.get_capacity()}
+    Performance Score: {vehicle.calculate_performance()}
     Crew Size: {vehicle.get_crewSize()}
     Reliability: {vehicle.get_reliability()}
     """)
