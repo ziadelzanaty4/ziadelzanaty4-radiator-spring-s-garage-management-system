@@ -178,11 +178,17 @@ while option!=7:
                     new_team = input("Enter new team: ")
                     vehicle.set_team(new_team)
                 elif choice == 3:
-                    new_speed = float(input("Enter new speed: "))
-                    vehicle.set_speed(new_speed)
+                    try:
+                        new_speed = float(input("Enter new speed: "))
+                        vehicle.set_speed(new_speed)
+                    except ValueError as e:
+                        print(e)
                 elif choice == 4:
-                    new_capacity = int(input("Enter new capacity: "))
-                    vehicle.set_capacity(new_capacity)
+                    try:
+                        new_capacity = int(input("Enter new capacity: "))
+                        vehicle.set_capacity(new_capacity)
+                    except ValueError as e:
+                        print(e)
                 elif choice == 5:
                     if vehicle.get_type() == "Racer":
                         print("""
