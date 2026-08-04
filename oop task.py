@@ -1,12 +1,12 @@
 class Car:
     def __init__(self, number, name, age, type, team, speed, capacity):
-        self._number=number
-        self._name=name
-        self._age=age
-        self._type=type
-        self._team=team
-        self._speed=speed
-        self._capacity=capacity
+        self.set_number(number)
+        self.set_name(name)
+        self.set_age(age)
+        self.set_type(type)
+        self.set_team(team)
+        self.set_speed(speed)
+        self.set_capacity(capacity)
     #getters    
     def get_number(self):
         return self._number
@@ -112,17 +112,21 @@ while option!=7:
         team = input("Enter team: ")
         speed = float(input("Enter speed: "))
         capacity = int(input("Enter capacity: "))
-        if vtype=="racer":
-            races=int(input("enter number of races completed: "))
-            laps=int(input("enter number of laps completed: "))
-            vehicle=Racer(number, name, age, "Racer", team, speed, capacity, races,laps)
-        elif vtype=="support":
-            crewSize=int(input("enter crew size: "))
-            reliability=float(input("enter reliability rating: "))
-            vehicle= SupportVehicle(number, name, age, "SupportVehicle", team, speed, capacity, crewSize,reliability)
-        else:
-            print("invalid vehicle type")
-            continue
+        try:
+            if vtype=="racer":
+                races=int(input("enter number of races completed: "))
+                laps=int(input("enter number of laps completed: "))
+                vehicle=Racer(number, name, age, "Racer", team, speed, capacity, races,laps)
+            elif vtype=="support":
+                crewSize=int(input("enter crew size: "))
+                reliability=float(input("enter reliability rating: "))
+                vehicle= SupportVehicle(number, name, age, "SupportVehicle", team, speed, capacity, crewSize,reliability)
+            else:
+                print("invalid vehicle type")
+                continue
+        except ValueError as e:
+            print(e)
+            continue    
         garage.append(vehicle)
         print("vehicle checked in successfully") 
     elif option == 2:
@@ -263,7 +267,31 @@ while option!=7:
     """)
                 break
         if not found:
-            print("Vehicle not found!")                                       
+            print("Vehicle not found!")    
+    elif option == 6:
+        if len(garage) == 0:
+            print("Garage is empty.")
+        else:
+            total_cars = len(garage)
+            total_performance = 0
+            teams = {}
+            for vehicle in garage:
+                total_performance += vehicle.calculate_performance()
+                team = vehicle.get_team()
+                if team in teams:
+                    teams[team] += 1
+                else:
+                    teams[team] = 1
+            average_performance = total_performance / total_cars
+            print(f"""
+    ========== Garage Report ==========
+    Total Cars Checked In: {total_cars}
+    Average Performance Score: {average_performance:.2f}
+    Cars Per Racing Team:
+    """)
+            for team in teams:
+                print(f"{team}: {teams[team]}")
+            print("==============================")                                               
 
    
               
