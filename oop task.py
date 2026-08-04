@@ -37,6 +37,8 @@ class Car:
         self._speed = speed
     def set_capacity(self, capacity):
         self._capacity = capacity
+    def calculate_performance(self):
+        pass    
 class Racer(Car):
     def __init__(self, number, name, age, type, team, speed, capacity, races, laps):
         super().__init__(number, name, age, type, team, speed, capacity)
@@ -50,7 +52,9 @@ class Racer(Car):
     def get_laps(self):
         return self._laps
     def set_laps(self, laps):
-        self._laps = laps     
+        self._laps = laps  
+    def calculate_performance(self):
+        return (self.get_speed() * 10) + self.get_capacity()       
 class SupportVehicle(Car):
     def __init__(self, number, name, age, type, team, speed, capacity, crewSize,reliability):
         super().__init__(number, name, age, type, team, speed, capacity)
@@ -65,7 +69,9 @@ class SupportVehicle(Car):
     def set_crewSize(self, crewSize):
         self._crewSize = crewSize
     def set_reliability(self, reliability):
-        self._reliability = reliability    
+        self._reliability = reliability
+    def calculate_performance(self):
+        return (self.get_speed() * 5) + (self.get_capacity() * 5)        
 
 
 Menu= f"""
