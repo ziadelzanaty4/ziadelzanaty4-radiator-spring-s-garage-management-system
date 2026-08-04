@@ -98,6 +98,14 @@ while option!=7:
     option=int(input("What's the move, Champ?"))
     if option==1:
         number = input("Enter number: ")
+        exist=False
+        for car in garage:
+            if car.get_number() == number:
+                exist = True
+                break 
+        if exist:
+            print("Car number already exists!")
+            continue    
         name = input("Enter name: ")
         age = int(input("Enter age: "))
         vtype = input("Enter type: ")
