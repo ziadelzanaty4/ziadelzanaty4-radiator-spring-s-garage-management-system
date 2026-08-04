@@ -28,14 +28,20 @@ class Car:
     def set_name(self, name):
         self._name = name
     def set_age(self, age):
+        if age <= 0:
+            raise ValueError("Age must be positive")
         self._age = age
     def set_type(self, type):
         self._type = type
     def set_team(self, team):
         self._team = team
     def set_speed(self, speed):
+        if speed <= 0:
+            raise ValueError("Speed must be positive")
         self._speed = speed
     def set_capacity(self, capacity):
+        if capacity <= 0:
+            raise ValueError("Capacity must be positive")
         self._capacity = capacity
     def calculate_performance(self):
         pass    
