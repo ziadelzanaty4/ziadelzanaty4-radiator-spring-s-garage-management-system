@@ -78,8 +78,69 @@ class SupportVehicle(Car):
     def set_reliability(self, reliability):
         self._reliability = reliability
     def calculate_performance(self):
-        return (self.get_speed() * 5) + (self.get_capacity() * 5)        
-
+        return (self.get_speed() * 5) + (self.get_capacity() * 5)  
+def save_data():
+    data = []
+    for vehicle in garage:
+        if vehicle.get_type() == "Racer":
+            data.append({
+                "number": vehicle.get_number(),
+                "name": vehicle.get_name(),
+                "age": vehicle.get_age(),
+                "type": vehicle.get_type(),
+                "team": vehicle.get_team(),
+                "speed": vehicle.get_speed(),
+                "capacity": vehicle.get_capacity(),
+                "races": vehicle.get_races(),
+                "laps": vehicle.get_laps()
+            })
+        else:
+            data.append({
+                "number": vehicle.get_number(),
+                "name": vehicle.get_name(),
+                "age": vehicle.get_age(),
+                "type": vehicle.get_type(),
+                "team": vehicle.get_team(),
+                "speed": vehicle.get_speed(),
+                "capacity": vehicle.get_capacity(),
+                "crewSize": vehicle.get_crewSize(),
+                "reliability": vehicle.get_reliability()
+            })
+    with open("garage.json", "w") as file:
+        json.dump(data, file, indent=4)          
+def load_data():
+    global garage
+    try:
+        with open("garage.json", "r") as file:
+            data = json.load(file)
+            for item in data:
+                if item["type"] == "Racer":
+                    vehicle = Racer(
+                        item["number"],
+                        item["name"],
+                        item["age"],
+                        item["type"],
+                        item["team"],
+                        item["speed"],
+                        item["capacity"],
+                        item["races"],
+                        item["laps"]
+                    )
+                else:
+                    vehicle = SupportVehicle(
+                        item["number"],
+                        item["name"],
+                        item["age"],
+                        item["type"],
+                        item["team"],
+                        item["speed"],
+                        item["capacity"],
+                        item["crewSize"],
+                        item["reliability"]
+                    )
+                garage.append(vehicle)
+    except FileNotFoundError:
+        pass
 
 Menu= f"""
 ========Radiator Springs Garage========
@@ -93,6 +154,7 @@ Menu= f"""
 =======================================
 """
 garage = []
+load_data()
 option=None
 while option!=7:
     print(Menu)
