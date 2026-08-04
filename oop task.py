@@ -191,6 +191,7 @@ while option!=7:
             print(e)
             continue    
         garage.append(vehicle)
+        save_data()
         print("vehicle checked in successfully") 
     elif option == 2:
         if len(garage) == 0:
@@ -282,6 +283,7 @@ while option!=7:
                             new_reliability = float(input("Enter new reliability: "))
                             vehicle.set_reliability(new_reliability)
                 print("Vehicle updated successfully!")
+                save_data()
                 break
         if not found:
             print("Vehicle not found!")
@@ -291,6 +293,7 @@ while option!=7:
         for vehicle in garage:
             if vehicle.get_number() == number:
                 garage.remove(vehicle)
+                save_data()
                 found = True
                 print("Vehicle retired successfully!")
                 break
@@ -355,7 +358,8 @@ while option!=7:
             for team in teams:
                 print(f"{team}: {teams[team]}")
             print("==============================")                                               
-
+else:
+    print("goodbye")
    
               
 
