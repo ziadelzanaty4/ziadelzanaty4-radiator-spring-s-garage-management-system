@@ -121,7 +121,35 @@ def get_reliability(prompt):
             else:
                 return value
         except ValueError:
-            print("Please enter a valid number.")                                      
+            print("Please enter a valid number.")
+def display_vehicle(vehicle):
+    if vehicle.get_type() == "Racer":
+        print(f"""
+Number: {vehicle.get_number()}
+Name: {vehicle.get_name()}
+Age: {vehicle.get_age()}
+Type: {vehicle.get_type()}
+Team: {vehicle.get_team()}
+Speed: {vehicle.get_speed()}
+Capacity: {vehicle.get_capacity()}
+Performance Score: {vehicle.calculate_performance()}
+Races: {vehicle.get_races()}
+Laps: {vehicle.get_laps()}
+""")
+
+    elif vehicle.get_type() == "SupportVehicle":
+        print(f"""
+Number: {vehicle.get_number()}
+Name: {vehicle.get_name()}
+Age: {vehicle.get_age()}
+Type: {vehicle.get_type()}
+Team: {vehicle.get_team()}
+Speed: {vehicle.get_speed()}
+Capacity: {vehicle.get_capacity()}
+Performance Score: {vehicle.calculate_performance()}
+Crew Size: {vehicle.get_crewSize()}
+Reliability: {vehicle.get_reliability()}
+""")                                                  
 def save_data():
     data = []
     for vehicle in garage:
@@ -368,40 +396,31 @@ while option!=7:
         if not found:
             print("Vehicle not found!")
     elif option == 5:
-        number = get_positive_integer("Enter vehicle number: ")
+        search_type = input(
+            "Search by number or name? (number/name): "
+        ).lower()
+        while search_type not in ["number", "name"]:
+            print("Please enter number or name.")
+            search_type = input(
+                "Search by number or name? (number/name): "
+            ).lower()
         found = False
-        for vehicle in garage:
-            if vehicle.get_number() == number:
-                found = True
-                if vehicle.get_type() == "Racer":
-                    print(f"""
-    Number: {vehicle.get_number()}
-    Name: {vehicle.get_name()}
-    Age: {vehicle.get_age()}
-    Type: {vehicle.get_type()}
-    Team: {vehicle.get_team()}
-    Speed: {vehicle.get_speed()}
-    Capacity: {vehicle.get_capacity()}
-    Performance Score: {vehicle.calculate_performance()}
-    Races: {vehicle.get_races()}
-    Laps: {vehicle.get_laps()}
-    """)
-                elif vehicle.get_type() == "SupportVehicle":
-                    print(f"""
-    Number: {vehicle.get_number()}
-    Name: {vehicle.get_name()}
-    Age: {vehicle.get_age()}
-    Type: {vehicle.get_type()}
-    Team: {vehicle.get_team()}
-    Speed: {vehicle.get_speed()}
-    Capacity: {vehicle.get_capacity()}
-    Performance Score: {vehicle.calculate_performance()}
-    Crew Size: {vehicle.get_crewSize()}
-    Reliability: {vehicle.get_reliability()}
-    """)
-                break
+        if search_type == "number":
+            number = get_positive_integer("Enter vehicle number: ")
+            for vehicle in garage:
+                if vehicle.get_number() == number:
+                    display_vehicle(vehicle)
+                    found = True
+                    break
+        else:
+            name = input("Enter vehicle name: ").strip()
+            for vehicle in garage:
+                if vehicle.get_name().lower() == name.lower():
+                    display_vehicle(vehicle)
+                    found = True
+                    break
         if not found:
-            print("Vehicle not found!")    
+            print("Vehicle not found!")  
     elif option == 6:
         if len(garage) == 0:
             print("Garage is empty.")
