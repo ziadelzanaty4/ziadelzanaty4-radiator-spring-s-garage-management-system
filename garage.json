@@ -1,6 +1,6 @@
 [
     {
-        "number": "2006",
+        "number": 2006,
         "name": "ziad",
         "age": 20,
         "type": "Racer",
@@ -11,7 +11,7 @@
         "laps": 100
     },
     {
-        "number": "2005",
+        "number": 2005,
         "name": "reem",
         "age": 19,
         "type": "SupportVehicle",
@@ -22,7 +22,7 @@
         "reliability": 10.0
     },
     {
-        "number": "2000",
+        "number": 2000,
         "name": "zizo",
         "age": 21,
         "type": "Racer",
@@ -31,5 +31,16 @@
         "capacity": 300,
         "races": 20,
         "laps": 100
+    },
+    {
+        "number": 20,
+        "name": "ad",
+        "age": 2,
+        "type": "Racer",
+        "team": "kk",
+        "speed": 20,
+        "capacity": 54,
+        "races": 5,
+        "laps": 20
     }
 ]

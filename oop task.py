@@ -94,7 +94,34 @@ class SupportVehicle(Car):
             raise ValueError("Reliability rating must be between 0 and 10")
         self._reliability = reliability
     def calculate_performance(self):
-        return (self.get_speed() * 5) + (self.get_capacity() * 5)  
+        return (self.get_speed() * 5) + (self.get_capacity() * 5)
+#Menu validation functions      
+def get_integer(prompt):
+    while True:
+        try:
+            return int(input(prompt))
+        except ValueError:
+            print("Please enter a valid number.") 
+def get_positive_integer(prompt):
+    while True:
+        try:
+            value = int(input(prompt))
+            if value <= 0:
+                print("Value must be positive.")
+            else:
+                return value
+        except ValueError:
+            print("Please enter a valid number.") 
+def get_reliability(prompt):
+    while True:
+        try:
+            value = float(input(prompt))
+            if value < 0 or value > 10:
+                print("Reliability must be between 0 and 10.")
+            else:
+                return value
+        except ValueError:
+            print("Please enter a valid number.")                          
 def save_data():
     data = []
     for vehicle in garage:
@@ -132,7 +159,7 @@ def load_data():
             for item in data:
                 if item["type"] == "Racer":
                     vehicle = Racer(
-                        item["number"],
+                        int(item["number"]),
                         item["name"],
                         item["age"],
                         item["type"],
@@ -144,7 +171,7 @@ def load_data():
                     )
                 else:
                     vehicle = SupportVehicle(
-                        item["number"],
+                        int(item["number"]),
                         item["name"],
                         item["age"],
                         item["type"],
@@ -174,9 +201,12 @@ load_data()
 option=None
 while option!=7:
     print(Menu)
-    option=int(input("What's the move, Champ?"))
+    option = get_integer("What's the move, Champ? ")
+    if option < 1 or option > 7:
+        print("Invalid option. Please choose a number from 1 to 7.")
+        continue
     if option==1:
-        number = int(input("Enter number: "))
+        number = get_positive_integer("Enter number: ")
         exist=False
         for car in garage:
             if car.get_number() == number:
@@ -186,19 +216,30 @@ while option!=7:
             print("Car number already exists!")
             continue    
         name = input("Enter name: ")
-        age = int(input("Enter age: "))
-        vtype = input("Enter type: ")
+        age = get_positive_integer("Enter age: ")
+        print("""
+        1. Racer
+        2. Support Vehicle
+        """)
+        type_choice = get_integer("Choose vehicle type: ")
+        if type_choice == 1:
+            vtype = "Racer"
+        elif type_choice == 2:
+            vtype = "SupportVehicle"
+        else:
+            print("Invalid vehicle type.")
+            continue
         team = input("Enter team: ")
-        speed = float(input("Enter speed: "))
-        capacity = int(input("Enter capacity: "))
+        speed = get_positive_integer("Enter speed: ")
+        capacity = get_positive_integer("Enter capacity: ")
         try:
-            if vtype=="racer":
-                races=int(input("enter number of races completed: "))
-                laps=int(input("enter number of laps completed: "))
+            if vtype == "Racer":
+                races=get_positive_integer("enter number of races completed: ")
+                laps=get_positive_integer("enter number of laps completed: ")
                 vehicle=Racer(number, name, age, "Racer", team, speed, capacity, races,laps)
-            elif vtype=="support":
-                crewSize=int(input("enter crew size: "))
-                reliability=float(input("enter reliability rating: "))
+            elif vtype == "SupportVehicle":
+                crewSize=get_positive_integer("enter crew size: ")
+                reliability=get_reliability("enter reliability rating: ")
                 vehicle= SupportVehicle(number, name, age, "SupportVehicle", team, speed, capacity, crewSize,reliability)
             else:
                 print("invalid vehicle type")
@@ -242,7 +283,7 @@ while option!=7:
     """)
                 print("-" * 40) 
     elif option == 3:
-        number = input("Enter vehicle number: ")
+        number = get_positive_integer("Enter vehicle number: ")
         found = False
         for vehicle in garage:
             if vehicle.get_number() == number:
@@ -254,7 +295,7 @@ while option!=7:
     4. Capacity
     5. Type-specific attribute
     """)
-                choice = int(input("What do you want to change? "))
+                choice = get_integer("What do you want to change? ")
                 if choice == 1:
                     new_name = input("Enter new name: ")
                     vehicle.set_name(new_name)
@@ -263,13 +304,13 @@ while option!=7:
                     vehicle.set_team(new_team)
                 elif choice == 3:
                     try:
-                        new_speed = float(input("Enter new speed: "))
+                        new_speed = get_positive_integer("Enter new speed: ")
                         vehicle.set_speed(new_speed)
                     except ValueError as e:
                         print(e)
                 elif choice == 4:
                     try:
-                        new_capacity = int(input("Enter new capacity: "))
+                        new_capacity = get_positive_integer("Enter new capacity: ")
                         vehicle.set_capacity(new_capacity)
                     except ValueError as e:
                         print(e)
@@ -279,24 +320,24 @@ while option!=7:
     1. Races
     2. Laps
     """)
-                        x = int(input("Choose: "))
+                        x = get_integer("Choose: ")
                         if x == 1:
-                            new_races = int(input("Enter new races: "))
+                            new_races = get_positive_integer("Enter new races: ")
                             vehicle.set_races(new_races)
                         elif x == 2:
-                            new_laps = int(input("Enter new laps: "))
+                            new_laps = get_positive_integer("Enter new laps: ")
                             vehicle.set_laps(new_laps)
                     elif vehicle.get_type() == "SupportVehicle":
                         print("""
     1. Crew Size
     2. Reliability
     """)
-                        x = int(input("Choose: "))
+                        x =get_integer("Choose: ")
                         if x == 1:
-                            new_crew = int(input("Enter new crew size: "))
+                            new_crew = get_positive_integer("Enter new crew size: ")
                             vehicle.set_crewSize(new_crew)
                         elif x == 2:
-                            new_reliability = float(input("Enter new reliability: "))
+                            new_reliability = get_reliability("Enter new reliability: ")
                             vehicle.set_reliability(new_reliability)
                 print("Vehicle updated successfully!")
                 save_data()
@@ -304,7 +345,7 @@ while option!=7:
         if not found:
             print("Vehicle not found!")
     elif option == 4:
-        number = input("Enter vehicle number to retire: ")
+        number = get_positive_integer("Enter vehicle number to retire: ")
         found = False
         for vehicle in garage:
             if vehicle.get_number() == number:
@@ -316,7 +357,7 @@ while option!=7:
         if not found:
             print("Vehicle not found!") 
     elif option == 5:
-        number = input("Enter vehicle number: ")
+        number = get_positive_integer("Enter vehicle number: ")
         found = False
         for vehicle in garage:
             if vehicle.get_number() == number:
