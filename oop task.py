@@ -349,13 +349,24 @@ while option!=7:
         found = False
         for vehicle in garage:
             if vehicle.get_number() == number:
-                garage.remove(vehicle)
-                save_data()
+                confirmation = input(
+                    "Are you sure you want to retire this vehicle? (y/n): "
+                ).lower()
+                while confirmation not in ["y", "n"]:
+                    print("Please enter y or n.")
+                    confirmation = input(
+                        "Are you sure you want to retire this vehicle? (y/n): "
+                    ).lower()
+                if confirmation == "y":
+                    garage.remove(vehicle)
+                    save_data()
+                    print("Vehicle retired successfully!")
+                else:
+                    print("Vehicle was not retired.")
                 found = True
-                print("Vehicle retired successfully!")
                 break
         if not found:
-            print("Vehicle not found!") 
+            print("Vehicle not found!")
     elif option == 5:
         number = get_positive_integer("Enter vehicle number: ")
         found = False
