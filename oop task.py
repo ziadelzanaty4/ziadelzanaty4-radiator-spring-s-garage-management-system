@@ -25,16 +25,24 @@ class Car:
         return self._capacity 
     #setters   
     def set_number(self, number):
+        if number <= 0:
+            raise ValueError("Car number must be positive")
         self._number = number
     def set_name(self, name):
+        if not name.strip():
+            raise ValueError("Name cannot be empty")
         self._name = name
     def set_age(self, age):
         if age <= 0:
             raise ValueError("Age must be positive")
         self._age = age
     def set_type(self, type):
+        if type not in ["Racer", "SupportVehicle"]:
+            raise ValueError("Invalid vehicle type")
         self._type = type
     def set_team(self, team):
+        if not team.strip():
+            raise ValueError("Name cannot be empty")
         self._team = team
     def set_speed(self, speed):
         if speed <= 0:
@@ -49,24 +57,28 @@ class Car:
 class Racer(Car):
     def __init__(self, number, name, age, type, team, speed, capacity, races, laps):
         super().__init__(number, name, age, type, team, speed, capacity)
-        self._races=races
-        self._laps=laps
+        self.set_races(races)
+        self.set_laps(laps)
     #racer getters and setters     
     def get_races(self):
         return self._races
-    def set_races(self, races):
-        self._races = races
     def get_laps(self):
         return self._laps
+    def set_races(self, races):
+        if races < 0:
+            raise ValueError("Number of races cannot be negative")
+        self._races = races
     def set_laps(self, laps):
-        self._laps = laps  
+        if laps < 0:
+            raise ValueError("Number of laps cannot be negative")
+        self._laps = laps 
     def calculate_performance(self):
         return (self.get_speed() * 10) + self.get_capacity()       
 class SupportVehicle(Car):
     def __init__(self, number, name, age, type, team, speed, capacity, crewSize,reliability):
         super().__init__(number, name, age, type, team, speed, capacity)
-        self._crewSize=crewSize
-        self._reliability=reliability
+        self.set_crewSize(crewSize)
+        self.set_reliability(reliability)
     # getters    
     def get_crewSize(self):
         return self._crewSize
@@ -74,8 +86,12 @@ class SupportVehicle(Car):
         return self._reliability
     # Setters
     def set_crewSize(self, crewSize):
+        if crewSize <= 0:
+            raise ValueError("Crew size must be positive")
         self._crewSize = crewSize
     def set_reliability(self, reliability):
+        if reliability < 0 or reliability > 10:
+            raise ValueError("Reliability rating must be between 0 and 10")
         self._reliability = reliability
     def calculate_performance(self):
         return (self.get_speed() * 5) + (self.get_capacity() * 5)  
@@ -160,7 +176,7 @@ while option!=7:
     print(Menu)
     option=int(input("What's the move, Champ?"))
     if option==1:
-        number = input("Enter number: ")
+        number = int(input("Enter number: "))
         exist=False
         for car in garage:
             if car.get_number() == number:

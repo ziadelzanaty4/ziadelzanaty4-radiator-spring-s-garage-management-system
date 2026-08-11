@@ -1,1 +1,35 @@
-[]
+[
+    {
+        "number": "2006",
+        "name": "ziad",
+        "age": 20,
+        "type": "Racer",
+        "team": "mia",
+        "speed": 200.0,
+        "capacity": 50,
+        "races": 40,
+        "laps": 100
+    },
+    {
+        "number": "2005",
+        "name": "reem",
+        "age": 19,
+        "type": "SupportVehicle",
+        "team": "ahly",
+        "speed": 200.0,
+        "capacity": 25,
+        "crewSize": 5,
+        "reliability": 10.0
+    },
+    {
+        "number": "2000",
+        "name": "zizo",
+        "age": 21,
+        "type": "Racer",
+        "team": "mia",
+        "speed": 200.0,
+        "capacity": 300,
+        "races": 20,
+        "laps": 100
+    }
+]
