@@ -121,7 +121,7 @@ def get_reliability(prompt):
             else:
                 return value
         except ValueError:
-            print("Please enter a valid number.")                          
+            print("Please enter a valid number.")                                      
 def save_data():
     data = []
     for vehicle in garage:
